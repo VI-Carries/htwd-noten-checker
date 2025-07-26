@@ -1,11 +1,20 @@
-FROM python:3.12.1-slim-bookworm
+FROM python:3.12-slim
 
 WORKDIR /app
 
+# Dependencies installieren
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY .env .
-COPY grade_checker.py .
+# App-Code kopieren
+COPY src/ ./src/
+COPY .env.example .env
 
-ENTRYPOINT ["python", "grade_checker.py"]
+# Logs-Ordner erstellen
+RUN mkdir -p logs
+
+# Unbuffered Python output für bessere Logs
+ENV PYTHONUNBUFFERED=1
+
+# App starten
+CMD ["python", "src/main.py"]
