@@ -1,10 +1,10 @@
-version: '3'
-
 services:
-  grade_checker:
-    build: .
-    container_name: grade_checker
-    restart: always
-    ports:
-      - 443
-      - 80
+    htwd-checker:
+        build: .
+        container_name: htwd-checker
+        restart: unless-stopped
+        env_file:
+            - .env
+        volumes:
+            - ./logs:/app/logs
+        mem_limit: 256m
