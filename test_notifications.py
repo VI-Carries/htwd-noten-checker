@@ -4,6 +4,11 @@ Test-Script für Benachrichtigungsdienste
 Kann verwendet werden um die Konfiguration zu testen
 """
 
+# Add src to path
+import sys
+
+sys.path.append("src")
+
 from config import Config
 from logger import Logger
 from notifications import NotificationManager
