@@ -2,6 +2,10 @@
 
 Ein containerisierter Service zur automatischen Überwachung neuer Noten im HTW Dresden Portal mit Benachrichtigungen über Pushbullet und Telegram.
 
+## ⚠️ Disclaimer
+
+Die Verwendung erfolgt auf eigene Gefahr. Der Autor übernimmt keine Haftung für Schäden durch die Nutzung dieses Scripts. Das Script basiert auf der aktuellen Struktur des HTW-Portals und könnte bei Änderungen nicht mehr funktionieren.
+
 ## ⚡ Features
 
 - 🔄 Automatische Überwachung neuer Noten (alle 10 Minuten)
@@ -107,10 +111,6 @@ htwd-noten-checker/
 ├── Makefile            # Entwickler-Kommandos
 └── .env.example        # Konfigurationsvorlage
 ```
-
-## ⚠️ Disclaimer
-
-Die Verwendung erfolgt auf eigene Gefahr. Der Autor übernimmt keine Haftung für Schäden durch die Nutzung dieses Scripts. Das Script basiert auf der aktuellen Struktur des HTW-Portals und könnte bei Änderungen nicht mehr funktionieren.
 
 ---
 
