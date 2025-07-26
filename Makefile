@@ -1,6 +1,6 @@
 # HTW Noten-Checker Makefile
 
-.PHONY: help build run stop logs clean test setup
+.PHONY: help build run stop logs clean setup test-grades test-notifications dev status
 
 # Default target
 help:
@@ -8,15 +8,16 @@ help:
 	@echo "================================"
 	@echo ""
 	@echo "Verfügbare Kommandos:"
-	@echo "  setup    - Erstelle .env aus .env.example"
-	@echo "  build    - Docker Image bauen"
-	@echo "  run      - Container im Hintergrund starten"
-	@echo "  stop     - Container stoppen"
-	@echo "  restart  - Container neu starten"
-	@echo "  logs     - Live-Logs anzeigen"
-	@echo "  test     - Benachrichtigungen testen"
-	@echo "  clean    - Container und Images entfernen"
-	@echo "  dev      - Lokale Entwicklungsumgebung"
+	@echo "  setup       		- Erstelle .env aus .env.example"
+	@echo "  build       		- Docker Image bauen"
+	@echo "  run         		- Container im Hintergrund starten"
+	@echo "  stop        		- Container stoppen"
+	@echo "  restart     		- Container neu starten"
+	@echo "  logs        		- Live-Logs anzeigen"
+	@echo "  test-notifications	- Benachrichtigungen testen"
+	@echo "  test-grades 		- Neue Noten simulieren (TEST-MODUS)"
+	@echo "  clean       		- Container und Images entfernen"
+	@echo "  dev         		- Lokale Entwicklungsumgebung"
 
 # Setup - .env erstellen
 setup:
@@ -52,13 +53,22 @@ logs:
 	docker-compose logs -f
 
 # Benachrichtigungen testen
-test:
+test-notifications:
 	@echo "🧪 Teste Benachrichtigungen..."
 	@if [ ! -f .env ]; then \
 		echo "❌ .env nicht gefunden! Führe 'make setup' aus"; \
 		exit 1; \
 	fi
 	python test_notifications.py
+
+# Neue Noten simulieren
+test-grades:
+	@echo "🎯 Starte Noten-Simulation..."
+	@if [ ! -f .env ]; then \
+		echo "❌ .env nicht gefunden! Führe 'make setup' aus"; \
+		exit 1; \
+	fi
+	python test_new_grades.py
 
 # Cleanup
 clean:
@@ -84,4 +94,4 @@ status:
 	docker-compose ps
 	@echo ""
 	@echo "📈 Resource Usage:"
-	docker stats --no-stream $$(docker-compose ps -q) 2>/dev/null || echo "Container nicht aktiv"
+	docker stats --no-stream $(docker-compose ps -q) 2>/dev/null || echo "Container nicht aktiv"
