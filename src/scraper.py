@@ -37,12 +37,22 @@ class HTWDScraper:
             from requests.adapters import HTTPAdapter
             from urllib3.util.retry import Retry
 
-            retry_strategy = Retry(
-                total=3,
-                status_forcelist=[429, 500, 502, 503, 504],
-                method_whitelist=["HEAD", "GET", "OPTIONS", "POST"],
-                backoff_factor=1,
-            )
+            # Kompatibilität für verschiedene urllib3 Versionen
+            try:
+                retry_strategy = Retry(
+                    total=3,
+                    status_forcelist=[429, 500, 502, 503, 504],
+                    allowed_methods=["HEAD", "GET", "OPTIONS", "POST"],
+                    backoff_factor=1,
+                )
+            except TypeError:
+                # Fallback für ältere urllib3 Versionen
+                retry_strategy = Retry(
+                    total=3,
+                    status_forcelist=[429, 500, 502, 503, 504],
+                    method_whitelist=["HEAD", "GET", "OPTIONS", "POST"],
+                    backoff_factor=1,
+                )
 
             adapter = HTTPAdapter(max_retries=retry_strategy)
             session.mount("http://", adapter)
