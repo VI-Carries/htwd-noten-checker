@@ -31,18 +31,18 @@ setup:
 # Docker Build
 build:
 	@echo "🔨 Baue Docker Image..."
-	docker-compose build
+	docker compose build
 
 # Container starten
 run: build
 	@echo "🚀 Starte Container..."
-	docker-compose up -d
+	docker compose up -d
 	@echo "✅ Container läuft! Logs mit 'make logs' anzeigen"
 
 # Container stoppen
 stop:
 	@echo "🛑 Stoppe Container..."
-	docker-compose down
+	docker compose down
 
 # Container neu starten
 restart: stop run
@@ -50,7 +50,7 @@ restart: stop run
 # Live-Logs anzeigen
 logs:
 	@echo "📋 Live-Logs (Ctrl+C zum Beenden)..."
-	docker-compose logs -f
+	docker compose logs -f
 
 # Benachrichtigungen testen
 test-notifications:
@@ -73,7 +73,7 @@ test-grades:
 # Cleanup
 clean:
 	@echo "🧹 Entferne Container und Images..."
-	docker-compose down --rmi all --volumes --remove-orphans
+	docker compose down --rmi all --volumes --remove-orphans
 	docker system prune -f
 
 # Lokale Entwicklung
@@ -91,7 +91,7 @@ dev:
 # Status anzeigen
 status:
 	@echo "📊 Container Status:"
-	docker-compose ps
+	docker compose ps
 	@echo ""
 	@echo "📈 Resource Usage:"
-	docker stats --no-stream $(docker-compose ps -q) 2>/dev/null || echo "Container nicht aktiv"
+	docker stats --no-stream $(docker compose ps -q) 2>/dev/null || echo "Container nicht aktiv"
