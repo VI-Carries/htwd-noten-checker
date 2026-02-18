@@ -70,6 +70,7 @@ make stop USER=s67890
 # Alle gleichzeitig verwalten
 make run-all       # Startet alle Benutzer in users/
 make stop-all      # Stoppt alle Checker
+make logs-all      # Live-Logs aller Checker anzeigen
 make status        # Zeigt alle laufenden Checker
 ```
 
@@ -83,6 +84,7 @@ make restart USER=sXXXXX     # Checker für Benutzer neu starten
 make logs USER=sXXXXX        # Live-Logs eines Benutzers anzeigen
 make run-all                 # Alle Benutzer starten
 make stop-all                # Alle Benutzer stoppen
+make logs-all                # Live-Logs aller Checker anzeigen
 make status                  # Alle laufenden Checker anzeigen
 make test-notifications USER=sXXXXX  # Benachrichtigungen testen
 make test-grades USER=sXXXXX         # Neue Noten simulieren

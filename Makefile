@@ -1,6 +1,6 @@
 # HTW Noten-Checker Makefile
 
-.PHONY: help build run stop restart logs clean setup test-grades test-notifications dev status run-all stop-all status
+.PHONY: help build run stop restart logs logs-all clean setup test-grades test-notifications dev status run-all stop-all
 
 USER ?=
 
@@ -18,6 +18,7 @@ help:
 	@echo "  logs USER=sXXXXX        - Live-Logs eines Benutzers anzeigen"
 	@echo "  run-all                 - Alle Benutzer starten"
 	@echo "  stop-all                - Alle Benutzer stoppen"
+	@echo "  logs-all                - Live-Logs aller Benutzer anzeigen"
 	@echo "  status                  - Alle laufenden Checker anzeigen"
 	@echo "  test-notifications USER=sXXXXX - Benachrichtigungen testen"
 	@echo "  test-grades USER=sXXXXX      - Neue Noten simulieren (TEST-MODUS)"
@@ -96,6 +97,11 @@ stop-all:
 		HTWD_USERNAME=$$user docker compose -p htwd-$$user down; \
 	done
 	@echo "✅ Alle Checker gestoppt!"
+
+# Live-Logs aller Benutzer
+logs-all:
+	@echo "📋 Live-Logs aller Checker (Ctrl+C zum Beenden)..."
+	@tail -f logs/*/htwd_checker.log 2>/dev/null || echo "Keine Log-Dateien gefunden"
 
 # Status aller Checker
 status:
