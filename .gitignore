@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+users/*.env
 
 # Virtual environments
 venv/

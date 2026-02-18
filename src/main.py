@@ -127,7 +127,7 @@ class GradeChecker:
         # Startup-Benachrichtigung
         self.notification_manager.send_notification(
             "HTW Noten-Checker",
-            f"Checker gestartet um {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}",
+            f"Checker für {self.config.htwd_username} gestartet um {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}",
         )
 
         # Hauptschleife
