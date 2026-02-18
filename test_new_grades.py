@@ -8,6 +8,7 @@ import signal
 import sys
 import time
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from typing import Dict, List
 
 # Add src to path
@@ -159,7 +160,7 @@ class MockGradeChecker:
         # Startup-Benachrichtigung
         self.notification_manager.send_notification(
             "HTW Noten-Checker (TEST)",
-            f"Test-Modus gestartet um {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}",
+            f"Test-Modus gestartet um {datetime.now(ZoneInfo("Europe/Berlin")).strftime('%d.%m.%Y %H:%M:%S')}",
         )
 
         # Hauptschleife
