@@ -14,7 +14,6 @@ import signal
 import sys
 import time
 from datetime import datetime
-from zoneinfo import ZoneInfo
 
 from config import Config
 from logger import Logger
@@ -43,7 +42,7 @@ class GradeChecker:
 
     def _is_active_time(self) -> bool:
         """Prüft ob aktuell aktive Zeit ist (06:00-22:00)"""
-        now = datetime.now(ZoneInfo("Europe/Berlin")).time()
+        now = datetime.now().time()
         start_time = datetime.strptime("06:00", "%H:%M").time()
         end_time = datetime.strptime("22:00", "%H:%M").time()
         return start_time <= now <= end_time
@@ -128,7 +127,7 @@ class GradeChecker:
         # Startup-Benachrichtigung
         self.notification_manager.send_notification(
             "HTW Noten-Checker",
-            f"Checker gestartet um {datetime.now(ZoneInfo("Europe/Berlin")).strftime('%d.%m.%Y %H:%M:%S')}",
+            f"Checker gestartet um {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}",
         )
 
         # Hauptschleife
