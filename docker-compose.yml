@@ -1,10 +1,10 @@
 services:
-    htwd-checker:
-        build: .
-        container_name: htwd-checker
-        restart: unless-stopped
-        env_file:
-            - .env
-        volumes:
-            - ./logs:/app/logs
-        mem_limit: 256m
+  htwd-checker:
+    build: .
+    container_name: htwd-checker-${HTWD_USERNAME}
+    restart: unless-stopped
+    env_file:
+      - users/${HTWD_USERNAME}.env
+    volumes:
+      - ./logs/${HTWD_USERNAME}:/app/logs
+    mem_limit: 256m

@@ -8,7 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # App-Code kopieren
 COPY src/ ./src/
-COPY .env.example .env
 
 # Logs-Ordner erstellen
 RUN mkdir -p logs
