@@ -59,7 +59,7 @@ test-notifications:
 		echo "❌ .env nicht gefunden! Führe 'make setup' aus"; \
 		exit 1; \
 	fi
-	python test_notifications.py
+	python3 test_notifications.py
 
 # Neue Noten simulieren
 test-grades:
@@ -68,7 +68,7 @@ test-grades:
 		echo "❌ .env nicht gefunden! Führe 'make setup' aus"; \
 		exit 1; \
 	fi
-	python test_new_grades.py
+	python3 test_new_grades.py
 
 # Cleanup
 clean:
@@ -80,13 +80,16 @@ clean:
 dev:
 	@echo "💻 Lokale Entwicklungsumgebung..."
 	@if [ ! -d "venv" ]; then \
-		python -m venv venv; \
+		python3 -m venv venv; \
 		echo "📦 Virtual Environment erstellt"; \
 	fi
-	@echo "Aktiviere venv und installiere Dependencies:"
-	@echo "  source venv/bin/activate  # Linux/Mac"
-	@echo "  venv\\Scripts\\activate     # Windows"
-	@echo "  pip install -r requirements.txt"
+	@if [ -f "venv/bin/pip" ]; then \
+		venv/bin/pip install -r requirements.txt; \
+	elif [ -f "venv/Scripts/pip.exe" ]; then \
+		venv/Scripts/pip install -r requirements.txt; \
+	fi
+	@echo "✅ Dependencies installiert!"
+	@echo "Zum Aktivieren: source venv/bin/activate (Linux/Mac) oder venv\\Scripts\\activate (Windows)"
 
 # Status anzeigen
 status:
