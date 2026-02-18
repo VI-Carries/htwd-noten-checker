@@ -13,9 +13,9 @@ from typing import Dict, List
 # Add src to path
 sys.path.append("src")
 
-from config import Config
-from logger import Logger
-from notifications import NotificationManager
+from src.config import Config
+from src.logger import Logger
+from src.notifications import NotificationManager
 
 
 class MockGradeChecker:
